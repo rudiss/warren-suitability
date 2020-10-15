@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Head from 'next/head';
-import { Grommet, Main, Box, Heading } from 'grommet';
+import { Grommet, Main } from 'grommet';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMutation } from 'react-query';
+import dynamic from 'next/dynamic';
 import { theme } from '../styles/theme';
-import Header from '../components/Header';
 import Messages from '../components/Messages';
 import { suitabilityConversation } from '../services/API';
 import ChatInputs from '../components/ChatInputs';
 import { InputContainer } from '../styles/App';
+
+const Header = dynamic(() => import('../components/Header'), { ssr: false });
 
 type requestType = {
   context: string;
@@ -24,26 +26,6 @@ const Home: React.FC = () => {
   const [inputValue, setInputValue] = useState(null);
   const answers = useSelector((state) => state.answers);
 
-  function messagesHandler(msg) {
-    const returnValues = [];
-
-    msg.map(({ value }) => {
-      const split = value.split('^');
-
-      return split.map((item) => {
-        const hasNumber = item.match(/(\d+)/);
-        if (hasNumber && +hasNumber[0] > 100) {
-          const delay = hasNumber[0];
-          const cleanItem = item.replace(delay, '');
-          returnValues.push(+delay);
-          return returnValues.push(cleanItem);
-        }
-        return returnValues.push(item);
-      });
-    });
-    // console.log('returnValues', returnValues);
-    return returnValues;
-  }
   const [fetchSuitability, { data, isLoading }] = useMutation(
     suitabilityConversation
   );
@@ -59,7 +41,9 @@ const Home: React.FC = () => {
   };
 
   const onSubmit = useCallback(
-    (e) => {
+    (formData, e) => {
+      console.log(formData);
+      console.log(e);
       const {
         data: { id },
       } = data;
@@ -76,14 +60,12 @@ const Home: React.FC = () => {
         id,
         answers: payload,
       });
+      setShowInput(false);
     },
     [data, dispatch, fetchSuitability, inputValue]
   );
   // console.log('isLoading', isLoading);
   // if (isLoading) return <div>Loading...</div>;
-
-  console.log('showInput', showInput);
-  console.log(inputValue);
 
   return (
     <React.Fragment>
@@ -112,12 +94,11 @@ const Home: React.FC = () => {
         <meta name='theme-color' content='#ffffff' />
       </Head>
       <Grommet theme={theme} style={{ position: 'relative', height: '100%' }}>
-        <Header background='gray_light' />
+        <Header />
         {data && (
           <Main
             background='white'
             pad='large'
-            gap='small'
             height='100%'
             style={{ maxWidth: 960, margin: '0 auto', padding: 24 }}
           >
@@ -125,19 +106,14 @@ const Home: React.FC = () => {
               data={data.data.messages}
               onFinishedTyping={setShowInput}
               responses={data.data.responses}
-              questiId={data.data.id}
+              questionId={data.data.id}
             />
           </Main>
         )}
 
-        {showInput && data && (
+        {data && (
           <InputContainer show={showInput}>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSubmit(onSubmit);
-              }}
-            >
+            <form onSubmit={handleSubmit(onSubmit)} action=''>
               <ChatInputs
                 data={data}
                 register={register}

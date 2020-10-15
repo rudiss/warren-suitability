@@ -1,6 +1,6 @@
 import React from 'react';
 import Typing from 'react-typing-animation';
-
+import { useSelector, useDispatch } from 'react-redux';
 import {
   MessageContainer,
   ChatContainer,
@@ -12,17 +12,26 @@ const Messages: React.FC = ({
   data,
   onFinishedTyping,
   responses,
-  questiId,
+  questionId,
 }) => {
   // console.log('data', data);
   const [list, setList] = React.useState([]);
   const [ageQuestion, setAgeQuestion] = React.useState([]);
+  const [nextQuestion, setNextQuestion] = React.useState(0);
+  const answers = useSelector((state) => state.answers);
+  const isMyObjectEmpty = (obj) => {
+    if (!Object.keys(obj).length) return true;
+    return false;
+  };
 
   React.useEffect(() => {
-    if (questiId === 'question_age') {
+    if (questionId === 'question_name') setList(data);
+
+    if (questionId === 'question_age') {
       setAgeQuestion(data);
+      setNextQuestion(1);
     }
-  }, [data]);
+  }, [data, questionId]);
 
   return (
     <ChatContainer>
@@ -32,27 +41,23 @@ const Messages: React.FC = ({
         speed={0}
         className='chat-container'
       >
-        {data.map(({ value }, i) => (
-          <MessageContainer key={value + i}>
-            <Typing.Delay ms={1000} key={Math.random()} />
+        {data.map(({ value }) => (
+          <MessageContainer key={value}>
             <img src='logo.png' alt='back' />
-            <span key={Math.random()}>{value}</span>
+            <span>{value.replace(/\^\d+/gm, '').replace(/<erase>/gm, '')}</span>
+            <Typing.Delay ms={1000} />
           </MessageContainer>
         ))}
-
-        {ageQuestion.length > 0 &&
-          ageQuestion.map(({ value }, i) => (
-            <MessageContainer key={value + i}>
-              <Typing.Delay ms={1000} key={Math.random()} />
-              <img src='logo.png' alt='back' />
-              <span key={Math.random()}>{value}</span>
-            </MessageContainer>
-          ))}
       </Typing>
-      <ResponseContainer>
-        {responses.map((res) => `${res.replace(/{{\w+.\w+}}/, '').trim()} `)}
-        <UserProfile>R</UserProfile>
-      </ResponseContainer>
+
+      {!isMyObjectEmpty(answers.answers) && responses.length > 0 && (
+        <ResponseContainer>
+          {responses.map((res) => `${res.replace(/{{\w+.\w+}}/, '').trim()} `)}
+          <UserProfile>
+            {answers.answers.question_name.charAt(0) || ''}
+          </UserProfile>
+        </ResponseContainer>
+      )}
     </ChatContainer>
   );
 };

@@ -8,7 +8,7 @@ import {
 
 const ChatInputs: React.FC = ({ register, data, handleChange, sub }) => {
   const {
-    data: { inputs, buttons },
+    data: { inputs, buttons, id },
   } = data;
 
   React.useEffect(() => {}, []);
@@ -16,7 +16,7 @@ const ChatInputs: React.FC = ({ register, data, handleChange, sub }) => {
   return (
     <Container>
       {inputs.map(({ mask, type }, i) =>
-        mask === 'name' ? (
+        mask === 'name' || id !== 'question_income' ? (
           <StyledInput
             key={i}
             id={mask}
@@ -24,7 +24,7 @@ const ChatInputs: React.FC = ({ register, data, handleChange, sub }) => {
             name={mask}
             ref={register}
             onChange={handleChange}
-            placeholder='Digite aqui'
+            placeholder='Digite aqui...'
           />
         ) : (
           <StyledCurrencyInput
@@ -39,21 +39,16 @@ const ChatInputs: React.FC = ({ register, data, handleChange, sub }) => {
         )
       )}
       {inputs.length > 0 && (
-        <StyledButton
-          type='submit'
-          label='OK'
-          className='btn-ok'
-          onClick={() => sub()}
-        />
+        <StyledButton type='submit' label='OK' className='btn-ok' />
       )}
 
       {buttons.map(({ label: { title }, value }) => (
         <StyledButton
           key={value}
           label={title}
-          onClick={(e) => handleChange(e)}
+          onClick={(e) => sub('', e)}
           value={value}
-          type='submit'
+          // type='submit'
           color='primary'
         />
       ))}

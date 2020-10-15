@@ -2,13 +2,9 @@ import React from 'react';
 import { Heading } from 'grommet';
 import { Container } from './styles';
 
-type HeaderProps = {
-  children: React.ReactChild;
-  rest: any;
-};
-const Header: React.FC<HeaderProps> = ({ children, ...rest }) => {
+const Header: React.FC = () => {
   return (
-    <Container {...rest}>
+    <Container>
       <a href='https://warren.com.br/'>
         <img src='left-arrow.svg' alt='back' />
       </a>
@@ -19,4 +15,4 @@ const Header: React.FC<HeaderProps> = ({ children, ...rest }) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

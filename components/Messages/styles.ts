@@ -13,6 +13,7 @@ export const MessageContainer = styled.div`
 
   display: flex;
   align-items: flex-start;
+  width: 100%;
 
   img {
     width: 32px;

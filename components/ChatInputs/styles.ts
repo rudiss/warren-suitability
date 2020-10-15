@@ -19,6 +19,12 @@ const inputStyle = css`
   &::placeholder {
     color: inherit;
   }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 export const Container = styled(Box)`
   max-width: 960px;
@@ -40,11 +46,7 @@ export const StyledInput = styled(TextInput)`
 export const StyledCurrencyInput = styled(CurrencyInput)`
   ${inputStyle};
   background: inherit;
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+
   outline: none;
 `;
 
@@ -63,6 +65,8 @@ export const StyledButton = styled(Button)`
   min-height: 69px;
   color: ${({ theme }) => theme.global.colors.white};
   background: ${({ theme }) => theme.global.colors.btnBg};
+
+  width: fit-content;
 
   &.btn-ok {
     min-width: 0;
