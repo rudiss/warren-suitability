@@ -13,7 +13,7 @@ Para rodar projeto rode no terminal:
 
 ```bash
 npm i && npm run dev
-# or
+# ou
 yarn && yarn dev
 ```
 
@@ -25,7 +25,7 @@ Para rodar build do projeto rode no terminal:
 
 ```bash
 npm run build && npm run start
-# or
+# ou
 yarn build && yarn start
 ```
 
@@ -33,5 +33,5 @@ yarn build && yarn start
 
 Você pode testar a aplicação no site abaixo:
 
-- [Warren Suitability](https://warren-suitability.vercel.app/) - learn about Next.js features and API.
+- [Warren Suitability](https://warren-suitability.vercel.app/) - PERFIL DE INVESTIDOR.
 
