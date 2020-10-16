@@ -8,7 +8,6 @@ export const MessageContainer = styled.div`
   font-weight: 400;
   transition: 0.2s cubic-bezier(0.55, 0, 0.1, 1);
   white-space: pre-wrap;
-  padding: 1px 48px 0 48px;
   margin: 30px 0 24px 0;
 
   display: flex;
@@ -34,6 +33,15 @@ export const ResponseContainer = styled.div`
   width: 100%;
   justify-content: flex-end;
   align-items: center;
+
+  font-family: 'Source Sans Pro', Helvetica, Arial, Sans-Serif;
+  color: #2e2d33;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0;
+  font-weight: 400;
+  transition: 0.2s cubic-bezier(0.55, 0, 0.1, 1);
+  white-space: pre-wrap;
 `;
 
 export const UserProfile = styled.div`

@@ -67,6 +67,7 @@ export const StyledButton = styled(Button)`
   background: ${({ theme }) => theme.global.colors.btnBg};
 
   width: fit-content;
+  min-width: 145px;
 
   &.btn-ok {
     min-width: 0;

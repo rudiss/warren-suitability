@@ -1,16 +1,12 @@
 const INITIAL_STATE = {
-  userAnswers: {},
+  messages: [],
 };
 
 const answerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'UPDATE_ANSWER':
+    case 'UPDATE_CHAT':
       return {
-        userAnswers: {
-          ...state.userAnswers,
-          ...action.payload.answer,
-        },
-        id: action.payload.id,
+        messages: [...state.messages, action.payload.messages],
       };
     default:
       return {

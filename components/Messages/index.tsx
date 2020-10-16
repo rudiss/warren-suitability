@@ -1,42 +1,31 @@
 import React from 'react';
 import Typing from 'react-typing-animation';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  MessageContainer,
-  ChatContainer,
-  ResponseContainer,
-  UserProfile,
-} from './styles';
+import { MessageContainer, ChatContainer } from './styles';
 
-const Messages: React.FC = ({
-  data,
-  onFinishedTyping,
-  responses,
-  questionId,
-}) => {
-  // console.log('data', data);
-  const [list, setList] = React.useState([]);
-  const [ageQuestion, setAgeQuestion] = React.useState([]);
-  const [nextQuestion, setNextQuestion] = React.useState(0);
-  const answers = useSelector((state) => state.answers);
-  const isMyObjectEmpty = (obj) => {
-    if (!Object.keys(obj).length) return true;
-    return false;
-  };
+type Messages = {
+  data: {
+    type: string;
+    value: string;
+  }[];
+  onFinishedTyping: (params: boolean) => void;
+};
 
-  React.useEffect(() => {
-    if (questionId === 'question_name') setList(data);
-
-    if (questionId === 'question_age') {
-      setAgeQuestion(data);
-      setNextQuestion(1);
-    }
-  }, [data, questionId]);
-
+const Messages: React.FC<Messages> = ({ data, onFinishedTyping }) => {
   return (
     <ChatContainer>
       <Typing
-        onFinishedTyping={() => onFinishedTyping(true)}
+        onFinishedTyping={() => {
+          onFinishedTyping(true);
+          setTimeout(() => {
+            document.querySelector('.input-focus')?.focus();
+          }, 300);
+        }}
+        onAfterType={() => {
+          document.getElementById('chatContainer').scrollTo({
+            top: document.getElementById('chatContainer').scrollHeight,
+            behavior: 'smooth',
+          });
+        }}
         hideCursor
         speed={0}
         className='chat-container'
@@ -49,15 +38,6 @@ const Messages: React.FC = ({
           </MessageContainer>
         ))}
       </Typing>
-
-      {!isMyObjectEmpty(answers.answers) && responses.length > 0 && (
-        <ResponseContainer>
-          {responses.map((res) => `${res.replace(/{{\w+.\w+}}/, '').trim()} `)}
-          <UserProfile>
-            {answers.answers.question_name.charAt(0) || ''}
-          </UserProfile>
-        </ResponseContainer>
-      )}
     </ChatContainer>
   );
 };
