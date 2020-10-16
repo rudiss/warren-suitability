@@ -1,6 +1,6 @@
 ## Tecnologias utilizadas
   
- - React - [ma biblioteca JavaScript para criar interfaces de usuário](https://pt-br.reactjs.org/)
+ - React - [Uma biblioteca JavaScript para criar interfaces de usuário](https://pt-br.reactjs.org/)
  - Nextjs - [The React Framework for Production](https://nextjs.org/docs)
  - Redux - [A Predictable State Container for JS Apps](https://redux.js.org/)
  - Styled Components - [Visual primitives for the component age](https://styled-components.com/)
