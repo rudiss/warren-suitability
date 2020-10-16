@@ -1,13 +1,13 @@
 ## Tecnologias utilizadas
   
- - React [ma biblioteca JavaScript para criar interfaces de usuário](https://pt-br.reactjs.org/)
- - Nextjs [The React Framework for Production](https://nextjs.org/docs)
- - Redux [A Predictable State Container for JS Apps](https://redux.js.org/)
- - Styled Components [Visual primitives for the component age](https://styled-components.com/)
- - TypeScript [Typed JavaScript at Any Scale.](https://www.typescriptlang.org/)
- - React Query [Hooks for fetching, caching and updating asynchronous data in React](https://react-query.tanstack.com/)
+ - React - [ma biblioteca JavaScript para criar interfaces de usuário](https://pt-br.reactjs.org/)
+ - Nextjs - [The React Framework for Production](https://nextjs.org/docs)
+ - Redux - [A Predictable State Container for JS Apps](https://redux.js.org/)
+ - Styled Components - [Visual primitives for the component age](https://styled-components.com/)
+ - TypeScript - [Typed JavaScript at Any Scale.](https://www.typescriptlang.org/)
+ - React Query - [Hooks for fetching, caching and updating asynchronous data in React](https://react-query.tanstack.com/)
 
-## Getting Started
+## Rodando o Projeto
 
 Para rodar projeto rode no terminal:
 
