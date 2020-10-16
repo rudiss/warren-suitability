@@ -17,7 +17,7 @@ npm i && npm run dev
 yarn && yarn dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) para visualizar a apalicação.
+Abra [http://localhost:3000](http://localhost:3000) para visualizar aplicação.
 
 Você pode começar a editar a página modificando `pages / index.js`. A página é atualizada automaticamente conforme você edita o arquivo.
 
