@@ -17,7 +17,10 @@ const Messages: React.FC<Messages> = ({ data, onFinishedTyping }) => {
         onFinishedTyping={() => {
           onFinishedTyping(true);
           setTimeout(() => {
-            document.querySelector('.input-focus')?.focus();
+            const input = document.querySelector(
+              '.input-focus'
+            ) as HTMLInputElement;
+            input.focus();
           }, 300);
         }}
         onAfterType={() => {
